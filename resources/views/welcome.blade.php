@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>UpTask 4.0</title>
+        <title>UpTask 5.0</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -79,7 +79,7 @@
             @endif
             <div class="content">
                 <div class="title m-b-md">
-                    UpTask 4.0
+                    UpTask 5.0
                 </div>
             </div>
         </div>
