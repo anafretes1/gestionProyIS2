@@ -1,7 +1,11 @@
-@extends('plantilla')
-
-@section('seccion')
-        <h1 class="display-4">PROYECTOS</h1>
+@extends('layouts.app')
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header" ><h1>Proyectos</h1></div>
+                    <div class="card-body">
         @if ( session('mensaje') )
             <div class="alert alert-success">
                 {{ session('mensaje') }}
@@ -117,8 +121,14 @@
                 </td>
             </tr>
             @endforeach
-            </tbody>
-        </table>
-        {{ $proyectos->links() }}<!--Boton de paginacion-->
+            </div>
+                </table>
+                    <a href="{{ url('desarrollo') }}" class="btn btn-primary">ATRAS</a>
+                </div>
+                {{ $proyectos->links() }}<!--Boton de paginacion-->
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
  

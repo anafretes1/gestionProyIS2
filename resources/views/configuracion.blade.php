@@ -1,6 +1,8 @@
-@extends('plantilla')
+@extends('layouts.app')
 
-@section('seccion')
-<h1>SECCION CONFIGURACION</h1>
+@section('content')
+    <div class="container my-4" align=center>
+        <h1>MÓDULO EN CONSTRUCCIÓN</h1>
+    </div>  
 @endsection
  

@@ -1,8 +1,13 @@
-@extends('plantilla')
+@extends('layouts.app')
 
-@section('seccion')
-  <h1>Editar permiso {{ $proyectos->id }}</h1>
-
+@section('content')
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">
+              Editar Proyecto
+            </div>
   @if (session('mensaje'))
       <div class="alert alert-success">
           {{ session('mensaje') }}
@@ -34,5 +39,11 @@
     <input type="text" name="id_fase" placeholder="Fase" class="form-control mb-2" value="{{ $proyectos->id_fase }}">
     <button class="btn btn-warning btn-block" type="submit">Editar</button>
   </form>
+  </div>
+  <a href="{{ url('proyectos') }}" class="btn btn-primary">ATRAS</a>
 
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection

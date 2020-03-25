@@ -22,6 +22,8 @@ Route::get('administracion', 'PagesController@administracion')->name('administra
     Route::get('administracion/roles', 'PagesController@roles')->name('rol');
     Route::post('administracion/roles', 'PagesController@crearRol')->name('roles.crearRol');
 
+    Route::get('administracion/usuarios', 'UsersController@index')->name('usuarios');
+
 
 Route::get('desarrollo', 'PagesController@desarrollo')->name('desarrollo');
 
@@ -52,5 +54,9 @@ Route::delete('/eliminarTarea/{id}', 'PagesController@eliminarTarea')->name('tar
 
 
 Route::get('configuracion', 'PagesController@configuracion')->name('config');
+
+//////////////////////////////////////////////////////prueba login
+Route::resource('usuarios', 'UsersController');
+
 
 

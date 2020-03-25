@@ -14,12 +14,7 @@
                     @endif
                     <div class="row justify-content-center">
                         <h2>Bienvenido {{ Auth::user()->name }} !</h2>
-                    </div>
-                    <div class="container">
-                        <a href="{{ route('administracion') }}" class="btn btn-primary">ADMINISTRACIÓN</a>
-                        <a href="{{ route('desarrollo') }}" class="btn btn-primary">DESARROLLO</a>
-                        <a href="{{ route('config') }}" class="btn btn-primary">CONFIGURACION</a>
-                    </div>         
+                    </div>      
                 </div>
             </div>
         </div>

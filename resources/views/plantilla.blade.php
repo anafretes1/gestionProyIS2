@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,15 +15,15 @@
   <div class="container my-4">
     <a href="{{ route('inicio') }}" class="btn btn-outline-primary">INICIO</a>
 
-    <a href="{{ route('administracion') }}" class="btn btn-primary">ADMINISTRACIÓN</a>
+    <!--<a href="{{ route('administracion') }}" class="btn btn-primary">ADMINISTRACIÓN</a>-->
     <!--<a href="{{ route('permiso') }}" class="btn btn-primary">PERMISOS</a>
     <a href="{{ route('rol') }}" class="btn btn-primary">ROLES</a>-->
 
-    <a href="{{ route('desarrollo') }}" class="btn btn-primary">DESARROLLO</a>
+    <!--<a href="{{ route('desarrollo') }}" class="btn btn-primary">DESARROLLO</a>-->
     <!--<a href="{{ route('proyecto') }}" class="btn btn-primary">PROYECTOS</a>
     <a href="{{ route('tarea') }}" class="btn btn-primary">TAREAS</a>-->
     
-    <a href="{{ route('config') }}" class="btn btn-primary">CONFIGURACION</a>
+    <!--<a href="{{ route('config') }}" class="btn btn-primary">CONFIGURACION</a>-->
 
   </div>
     <div class="container my-4">

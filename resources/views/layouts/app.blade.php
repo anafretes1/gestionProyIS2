@@ -36,14 +36,12 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -51,8 +49,13 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <li>
+                                <a href="{{ route('administracion') }}" class ="nav-link">Administración</a>
+                            </li>
+                            <a href="{{ route('desarrollo') }}" class ="nav-link">Desarrollo</a>
+                            <a href="{{ route('config') }}" class ="nav-link">Configuración</a>
 
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -61,22 +64,18 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Salír') }}
-
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                   
                                 </div>
-                        
                             </li>
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
