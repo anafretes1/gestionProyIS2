@@ -17,7 +17,7 @@
                         <form method="POST" action="{{ route('roles.crearRol') }}">
                             @csrf
                             <!--Validaciones de campos vacios mensaje mas boton de cerrar-->
-                            @error('nombre_rol')
+                            @error('name')
                                 <div class="alert alert-danger alert-dismissible fade show">
                                     El nombre del rol es requerido
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -25,30 +25,30 @@
                                     </button>
                                 </div>
                             @enderror 
-                            @if ($errors->has('descripcion_rol'))
+                          <!--  @if ($errors->has('descripcion_rol'))
                                 <div class="alert alert-danger alert-dismissible fade show" >
                                     La descripción es requerida
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                            @endif
+                            @endif-->
                             <!--EN LOS INPUTS, el campo name = "nombre deL CAMPO DE LA tabla de la BD"-->
                             <input 
                                 type="text" 
-                                name="nombre_rol" 
+                                name="name" 
                                 placeholder="Nombre del Rol" 
                                 class="form-control mb-2" 
-                                value="{{ old('nombre_rol') }}"
+                                value="{{ old('name') }}"
                             />
-                            <input 
+                           <!-- <input 
                                 type="text" 
                                 name="descripcion_rol" 
                                 placeholder="Descripcion del Rol" 
                                 class="form-control mb-2" 
                                 value="{{ old('descripcion_rol') }}"
-                                />
-                            <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
+                                />-->
+                            <button class="btn btn-success btn-block mb-2" type="submit">Agregar</button>
                         </form>
                     
 
@@ -57,16 +57,18 @@
                                 <tr>
                                     <th scope="col">#Id</th>
                                     <th scope="col">Nombre</th>
-                                    <th scope="col">Descripción</th>
+                                 <!--   <th scope="col">Descripción</th>-->
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($roles as $item)
-                            <tr>
-                                <th scope="row">{{$item->id }}</th><!--Nombre de los campos de las tablas-->
+                            <tr><!--Nombre de los campos de las tablas-->
+                                <!--<th scope="row">{{$item->id }}</th>
                                 <td>{{$item->nombre_rol }}</td>
-                                <td>{{$item->descripcion_rol }}</td>
+                                <td>{{$item->descripcion_rol }}</td>-->
+                                <th scope="row">{{$item->id }}</th>
+                                <td>{{$item->name}}</td>
                                 <!--BTN-EDITAR : 1 Crear el ancla, configurarlo e inventar una ruta para href= "",
                                 PASO 2 = Crear la ruta definida anteriormente en web (en name = roles.editar)-->
                                 <td><a href="{{ route('roles.editarRol', $item) }}" class="btn btn-warning btn-sm">Editar</a>

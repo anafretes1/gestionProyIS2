@@ -57,12 +57,12 @@ class PagesController extends Controller
         // return $request->all();
         //validaciones de los campos "name" de los inputs     name="nombre_permiso"
         $request->validate([
-            'nombre_rol' => 'required',
-            'descripcion_rol' => 'required'
+            'name' => 'required'
+            //'descripcion_rol' => 'required'
         ]);
         $rolNuevo = new App\Role;
-        $rolNuevo->nombre_rol = $request->nombre_rol;
-        $rolNuevo->descripcion_rol = $request->descripcion_rol;
+        $rolNuevo->name = $request->name;
+        //$rolNuevo->descripcion_rol = $request->descripcion_rol;
         $rolNuevo->save();
         return back()->with('mensaje', 'Rol agregado!!!');
     }
@@ -118,8 +118,8 @@ class PagesController extends Controller
     public function updateRol(Request $request, $id)
     {
         $rolUpdate = App\Role::findOrFail($id);
-        $rolUpdate->nombre_rol = $request->nombre_rol;
-        $rolUpdate->descripcion_rol = $request->descripcion_rol;
+        $rolUpdate->name = $request->name;
+        //$rolUpdate->descripcion_rol = $request->descripcion_rol;
         $rolUpdate->save();
             return back()->with('mensaje', 'Rol Editado!!!');
     }

@@ -46,7 +46,7 @@
                                 placeholder="Descripcion del Permiso" 
                                 class="form-control mb-2" 
                                 value="{{ old('descripcion_permiso') }}"/>
-                            <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
+                            <button class="btn btn-success btn-block mb-2" type="submit">Agregar</button>
                         </form>
 
                         <table class="table">
