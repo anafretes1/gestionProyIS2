@@ -6,7 +6,7 @@
         <div class="col-md-8">
           <div class="card">
             <div class="card-header">
-              Editar usuario
+              <h1>Editar usuario Id = {{ $usuario->id }}</h1>
             </div>
             <div class="card-body">
               <form action="{{ route('usuarios.update', $usuario->id) }}" method="post">
@@ -42,7 +42,10 @@
                 </div>
               </form>
             </div>
+
           </div>
+          <a href="{{ url('administracion/usuarios') }}" class="btn btn-primary">ATRAS</a>
+
         </div>
       </div>
     </div>

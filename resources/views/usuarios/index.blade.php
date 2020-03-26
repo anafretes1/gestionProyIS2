@@ -23,22 +23,20 @@
                                 </tr>  
                             </thead>
                             <tbody>
-                            @foreach ($users as $usuario)
-                                <tr>
-                                <td>{{ $usuario->name }}</td>
-                                <td>{{ $usuario->email }}</td>
-                                <td>{{ $usuario->roles->implode('name', ', ') }}</td>
-                                <td>
-                                    
-                                        <a href="{{ url('/usuarios/'.$usuario->id.'/edit') }}" class="btn btn-primary">Editar</a>
-                                 
-                                   
-                                        @include('usuarios.delete', ['usuario' => $usuario])
-                                </tr>
-                            @endforeach
+                                @foreach ($users as $usuario)
+                                    <tr>
+                                        <td>{{ $usuario->name }}</td>
+                                        <td>{{ $usuario->email }}</td>
+                                        <td>{{ $usuario->roles->implode('name', ', ') }}</td>
+                                        <td>
+                                            <a href="{{ url('/usuarios/'.$usuario->id.'/edit') }}" 
+                                            class="btn btn-primary">Editar</a>
+                                            @include('usuarios.delete', ['usuario' => $usuario])
+                                        </td>  
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                     
                         <a href="{{ url('administracion') }}" class="btn btn-primary">ATRAS</a>
                     </div>
                     {{ $users->links()}}

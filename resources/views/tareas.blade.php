@@ -97,7 +97,7 @@
             @endforeach
             </div>
                 </table>
-                    <a href="{{ url('dearrollo') }}" class="btn btn-primary">ATRAS</a>
+                    <a href="{{ url('desarrollo') }}" class="btn btn-primary">ATRAS</a>
                 </div>
                 {{ $tareas->links() }}<!--Boton de paginacion-->
             </div>

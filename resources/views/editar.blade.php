@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Editar Permisos</div>
+                    <div class="card-header"><h1>Editar Permisos Id= {{ $permisos->id }}</h1></div>
                     <div class="card-body">
                         @if (session('mensaje'))
                             <div class="alert alert-success">
