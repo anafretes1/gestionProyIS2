@@ -29,12 +29,22 @@ class PagesController extends Controller
     }
     public function proyectos(){
         $proyectos = App\Proyecto::paginate(3);
-        return view('proyectos',compact('proyectos'));
+        $estados = App\Estado::all();
+       // $estadosProy = $estados->pluck('name');
+
+        return view('proyectos',compact('proyectos','estados'));
     }
     public function tareas(){
         $tareas = App\Tarea::paginate(3);
-        return view('tareas',compact('tareas'));
+        $estados = App\Estado::all();
+
+        return view('tareas',compact('tareas','estados'));
     }
+    public function estados(){
+        $estados = App\Estado::paginate(3);
+        return view('estados',compact('estados'));
+    }
+
     public function configuracion(){
         return view('configuracion');
     }
@@ -67,7 +77,7 @@ class PagesController extends Controller
         return back()->with('mensaje', 'Rol agregado!!!');
     }
     public function crearProyecto(Request $request)
-    {
+    { 
         $request->validate([
             'nombre_proyecto' => 'required',
             'descripcion_proyecto' => 'required'
@@ -80,6 +90,7 @@ class PagesController extends Controller
         $proyectoNuevo->anho_proyecto = $request->anho_proyecto;
         $proyectoNuevo->estado_proyecto = $request->estado_proyecto;
         $proyectoNuevo->id_fase = $request->id_fase;
+        //dd($proyectoNuevo);
         $proyectoNuevo->save();
         return back()->with('mensaje', 'Proyecto agregado!!!');
     }
@@ -95,6 +106,17 @@ class PagesController extends Controller
         $tareaNuevo->save();
         return back()->with('mensaje', 'Tarea agregada!!!');
     }
+    public function crearEstado(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required'
+        ]);
+        $estadoNuevo = new App\Estado;
+        $estadoNuevo->nombre = $request->nombre;
+        $estadoNuevo->save();
+        return back()->with('mensaje', 'Estado agregado!!!');
+    }
+
                                         //SECCION EDITAR
 
     public function editar($id)
@@ -126,7 +148,8 @@ class PagesController extends Controller
     public function editarProyecto($id)
     {
         $proyectos = App\Proyecto::findOrFail($id);
-            return view('editarProyecto', compact('proyectos'));
+        $estados = App\Estado::all();//->pluck('nombre');
+        return view('editarProyecto', compact('proyectos','estados'));
     }                         
     public function updateProyecto(Request $request, $id)
     {
@@ -138,13 +161,19 @@ class PagesController extends Controller
         $proyectoUpdate->anho_proyecto = $request->anho_proyecto;
         $proyectoUpdate->estado_proyecto = $request->estado_proyecto;
         $proyectoUpdate->id_fase = $request->id_fase;
+        //dd($proyectoUpdate);
+
         $proyectoUpdate->save();
             return back()->with('mensaje', 'Proyecto Editado!!!');
     }
+
+
+
     public function editarTarea($id)
     {
         $tareas = App\Tarea::findOrFail($id);
-            return view('editarTarea', compact('tareas'));
+        $estados = App\Estado::all();//->pluck('nombre');
+        return view('editarTarea', compact('tareas','estados'));
     }  
     public function updateTarea(Request $request, $id)
     {
@@ -158,7 +187,18 @@ class PagesController extends Controller
         $tareaUpdate->save();
             return back()->with('mensaje', 'Tarea Editada!!!');
     }
-
+    public function editarEstado($id)
+    {
+        $estados = App\Estado::findOrFail($id);
+            return view('editarEstado', compact('estados'));
+    }                         
+    public function updateEstado(Request $request, $id)
+    {
+        $estadoUpdate = App\Estado::findOrFail($id);
+        $estadoUpdate->nombre = $request->nombre;
+        $estadoUpdate->save();
+            return back()->with('mensaje', 'Estado Editado!!!');
+    }
                         //SECCION ELIMINAR
     public function eliminar($id)
     {
@@ -184,7 +224,12 @@ class PagesController extends Controller
         $tareaEliminar->delete();
         return back()->with('mensaje', 'Tarea Eliminada!!!');
     }
-
+    public function eliminarEstado($id)
+    {
+        $estadoEliminar = App\Estado::findOrFail($id);
+        $estadoEliminar->delete();
+        return back()->with('mensaje', 'Estado Eliminado!!!');
+    }
 
 
 

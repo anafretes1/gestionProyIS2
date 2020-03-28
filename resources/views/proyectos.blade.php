@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-16">
                 <div class="card">
                     <div class="card-header" ><h1>Proyectos</h1></div>
                         <div class="card-body">
@@ -35,48 +35,85 @@
                                     </div>
                                 @endif
                                 <!--EN LOS INPUTS, el campo name = "nombre deL CAMPO DE LA tabla de la BD"-->
-                                <input 
-                                    type="text" 
-                                    name="nombre_proyecto" 
-                                    placeholder="Nombre del Poryecto" 
-                                    class="form-control mb-2" 
-                                    value="{{ old('nombre_proyecto') }}"/>
-                                <input 
-                                    type="text" 
-                                    name="descripcion_proyecto" 
-                                    placeholder="Descripcion del Proyecto" 
-                                    class="form-control mb-2" 
-                                    value="{{ old('descripcion_proyecto') }}"/>
-                                <input 
-                                    type="date" 
-                                    name="fecha_inicio" 
-                                    placeholder="Fecha de Inicio" 
-                                    class="form-control mb-2" 
-                                    value="{{ old('fecha_inicio') }}"/>
-                                <input 
-                                    type="date" 
-                                    name="fecha_fin_estimada" 
-                                    placeholder="Fecha Fin Estimada" 
-                                    class="form-control mb-2" 
-                                    value="{{ old('fecha_fin_estimada') }}"/>
-                                <input 
-                                    type="number" 
-                                    name="anho_proyecto" 
-                                    placeholder="Año" 
-                                    class="form-control mb-2" 
-                                    value="{{ old('anho_proyecto') }}"/>
-                                <input 
-                                    type="text" 
-                                    name="estado_proyecto" 
-                                    placeholder="Estado del Proyecto" 
-                                    class="form-control mb-2" 
-                                    value="{{ old('estado_proyecto') }}"/>
-                                <input 
-                                    type="number" 
-                                    name="id_fase" 
-                                    placeholder="Fase relacionada" 
-                                    class="form-control mb-2" 
-                                    value="{{ old('id_fase') }}"/>
+                                <div class="form-group">
+                                    <label for="nombre_proyecto">Nombre</label>
+                                    <input 
+                                        type="text" 
+                                        name="nombre_proyecto" 
+                                        placeholder="Nombre del Poryecto" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('nombre_proyecto') }}"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcion_proyecto">Descripcion</label>
+                                    <input 
+                                        type="text" 
+                                        name="descripcion_proyecto" 
+                                        placeholder="Descripcion del Proyecto" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('descripcion_proyecto') }}"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha_inicio">Fecha de Inicio</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_inicio" 
+                                        placeholder="Fecha de Inicio" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('fecha_inicio') }}"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha_fin_estimada">Fecha fin estimada</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_fin_estimada" 
+                                        placeholder="Fecha Fin Estimada" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('fecha_fin_estimada') }}"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="anho_proyecto">Año</label>
+                                    <input 
+                                        type="number" 
+                                        name="anho_proyecto" 
+                                        placeholder="Año" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('anho_proyecto') }}"
+                                    />
+                                </div>
+                               <!-- <div class="form-group">
+                                    <label for="estado_proyecto">Estado del Proyecto</label>
+                                    <input 
+                                        type="text" 
+                                        name="estado_proyecto" 
+                                        placeholder="Estado del Proyecto" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('estado_proyecto') }}"
+                                    />
+                                </div>-->
+                                <div class="form-group">
+                                    <label for="estado_proyecto">Estado</label>
+                                    <select class="form-control" name="estado_proyecto" >
+                                        <option value="">-- Escoja el estado --</option>
+                                        @foreach ($estados as $key)
+                                            <option value="{{ $key['nombre'] }}">{{ $key['nombre'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha_fin_estimada">Fase relacionada</label>
+                                    <input 
+                                        type="number" 
+                                        name="id_fase" 
+                                        placeholder="Fase relacionada" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('id_fase') }}"
+                                    />
+                                </div>   
                                 <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
                             </form>
                         

@@ -1,0 +1,36 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Editar Estado {{ $estados->id }}</h1>
+                    </div>
+                    <div class="card-body">
+                    @if (session('mensaje'))
+                        <div class="alert alert-success">
+                            {{ session('mensaje') }}
+                        </div>
+                    @endif
+                    <form action="{{ route('estados.updateEstado', $estados->id) }}" method="POST">
+                        @method('PUT')
+                        @csrf
+                        @error('nombre')
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                El nombre del estado es requerido
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @enderror 
+                            <input type="text" name="nombre" placeholder="Nombre" class="form-control mb-2" value="{{ $estados->nombre }}">
+                            <button class="btn btn-warning btn-block" type="submit">Editar</button>
+                    </form>
+                </div>
+            </div>
+            <a href="{{ url('desarrollo/estados') }}" class="btn btn-primary">ATRAS</a>
+        </div>
+    </div>
+@endsection

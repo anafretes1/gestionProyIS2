@@ -33,6 +33,9 @@ Route::get('desarrollo', 'PagesController@desarrollo')->name('desarrollo');
     Route::get('desarrollo/tareas', 'PagesController@tareas')->name('tarea');
     Route::post('desarrollo/tareas', 'PagesController@crearTarea')->name('tareas.crearTarea');
 
+    Route::get('desarrollo/estados', 'PagesController@estados')->name('estado');
+    Route::post('desarrollo/estados', 'PagesController@crearEstado')->name('estados.crearEstado');
+
 Route::get('/editar/{id}', 'PagesController@editar' )->name('permisos.editar');
 Route::put('editar/{id}', 'PagesController@update' )->name('permisos.update');
 
@@ -51,6 +54,14 @@ Route::delete('/eliminarProyecto/{id}', 'PagesController@eliminarProyecto')->nam
 Route::get('/editarTarea/{id}', 'PagesController@editarTarea' )->name('tareas.editarTarea');
 Route::put('editarTarea/{id}', 'PagesController@updateTarea' )->name('tareas.updateTarea');
 Route::delete('/eliminarTarea/{id}', 'PagesController@eliminarTarea')->name('tareas.eliminarTarea');
+
+
+//ESTADOS
+Route::get('/editarEstado/{id}', 'PagesController@editarEstado' )->name('estados.editarEstado');
+Route::put('editarEstado/{id}', 'PagesController@updateEstado' )->name('estados.updateEstado');
+Route::delete('/eliminarEstado/{id}', 'PagesController@eliminarEstado')->name('estados.eliminarEstado');
+
+
 
 
 Route::get('configuracion', 'PagesController@configuracion')->name('config');
