@@ -45,7 +45,7 @@ class RolesAndPermissions extends Seeder
         $role->givePermissionTo('update user');
         $role->givePermissionTo('delete user');
 
-        $role = Role::create(['name' => 'super-admin']);
+        $role = Role::create(['name' => 'Administrador']);
         $role->givePermissionTo(Permission::all());
     }
 }

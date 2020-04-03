@@ -20,7 +20,7 @@ class CreateTareasTable extends Migration
             $table->string('estado_tarea');
             $table->string('descripcion_tarea');
             $table->string('observacion_tarea');
-            $table->string('id_padre_tarea');
+            $table->string('id_padre_tarea')->nullable($value = true);
             $table->timestamps();
         });
     }

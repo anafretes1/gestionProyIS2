@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App;
-
+use App\User;
 class PagesController extends Controller
 {
     public function inicio()
@@ -12,7 +12,7 @@ class PagesController extends Controller
         return view('welcome');
     }
     public function permisos(){
-        $permisos = App\Permiso::paginate(3);//metodo para la paginacion
+        $permisos = App\Permission::paginate(3);//metodo para la paginacion
         return view('permisos',compact('permisos'));
     }
     public function roles(){
@@ -30,9 +30,11 @@ class PagesController extends Controller
     public function proyectos(){
         $proyectos = App\Proyecto::paginate(3);
         $estados = App\Estado::all();
+        $tareas = App\Tarea::all();
+
        // $estadosProy = $estados->pluck('name');
 
-        return view('proyectos',compact('proyectos','estados'));
+        return view('proyectos',compact('proyectos','estados','tareas'));
     }
     public function tareas(){
         $tareas = App\Tarea::paginate(3);
@@ -53,12 +55,11 @@ class PagesController extends Controller
         // return $request->all();
         //validaciones de los campos "name" de los inputs     name="nombre_permiso"
         $request->validate([
-            'nombre_permiso' => 'required',
-            'descripcion_permiso' => 'required'
+            'name' => 'required'
         ]);
         $permisoNuevo = new App\Permiso;
-        $permisoNuevo->nombre_permiso = $request->nombre_permiso;
-        $permisoNuevo->descripcion_permiso = $request->descripcion_permiso;
+        $permisoNuevo->name = $request->name;
+        //$permisoNuevo->guard_name = 'web'; //$request->descripcion_permiso;
         $permisoNuevo->save();
         return back()->with('mensaje', 'Permiso agregado!!!');
     }
@@ -72,6 +73,7 @@ class PagesController extends Controller
         ]);
         $rolNuevo = new App\Role;
         $rolNuevo->name = $request->name;
+        $rolNuevo->guard_name = 'web';///agregado solucion al error null de la bd 
         //$rolNuevo->descripcion_rol = $request->descripcion_rol;
         $rolNuevo->save();
         return back()->with('mensaje', 'Rol agregado!!!');
@@ -87,9 +89,8 @@ class PagesController extends Controller
         $proyectoNuevo->descripcion_proyecto = $request->descripcion_proyecto;
         $proyectoNuevo->fecha_inicio = $request->fecha_inicio;
         $proyectoNuevo->fecha_fin_estimada = $request->fecha_fin_estimada;
-        $proyectoNuevo->anho_proyecto = $request->anho_proyecto;
         $proyectoNuevo->estado_proyecto = $request->estado_proyecto;
-        $proyectoNuevo->id_fase = $request->id_fase;
+        $proyectoNuevo->id_tarea = $request->id_tarea;
         //dd($proyectoNuevo);
         $proyectoNuevo->save();
         return back()->with('mensaje', 'Proyecto agregado!!!');
@@ -127,8 +128,10 @@ class PagesController extends Controller
     public function update(Request $request, $id)
     {
         $permisoUpdate = App\Permiso::findOrFail($id);
-        $permisoUpdate->nombre_permiso = $request->nombre_permiso;
-        $permisoUpdate->descripcion_permiso = $request->descripcion_permiso;
+        //$permisoUpdate->nombre_permiso = $request->nombre_permiso;
+        //$permisoUpdate->descripcion_permiso = $request->descripcion_permiso;
+        $permisoUpdate->name = $request->name;
+        // $permisoUpdate->guard_name = 'web'; //$request->descripcion_permiso;
         $permisoUpdate->save();
             return back()->with('mensaje', 'Permiso Editado!!!');
     }
@@ -149,7 +152,9 @@ class PagesController extends Controller
     {
         $proyectos = App\Proyecto::findOrFail($id);
         $estados = App\Estado::all();//->pluck('nombre');
-        return view('editarProyecto', compact('proyectos','estados'));
+        $tareas = App\Tarea::all();
+
+        return view('editarProyecto', compact('proyectos','estados','tareas'));
     }                         
     public function updateProyecto(Request $request, $id)
     {
@@ -158,16 +163,13 @@ class PagesController extends Controller
         $proyectoUpdate->descripcion_proyecto = $request->descripcion_proyecto;
         $proyectoUpdate->fecha_inicio = $request->fecha_inicio;
         $proyectoUpdate->fecha_fin_estimada = $request->fecha_fin_estimada;
-        $proyectoUpdate->anho_proyecto = $request->anho_proyecto;
         $proyectoUpdate->estado_proyecto = $request->estado_proyecto;
-        $proyectoUpdate->id_fase = $request->id_fase;
+        $proyectoUpdate->id_tarea = $request->id_tarea;
         //dd($proyectoUpdate);
 
         $proyectoUpdate->save();
             return back()->with('mensaje', 'Proyecto Editado!!!');
     }
-
-
 
     public function editarTarea($id)
     {

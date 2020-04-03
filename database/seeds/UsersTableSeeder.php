@@ -38,6 +38,14 @@ class UsersTableSeeder extends Seeder
             'password' => '123456'
           ]);
   
-          $admin->assignRole('super-admin');
+          $admin->assignRole('Administrador');
+
+
+
+////////////////////////////////prueba de datatable
+
+            //factory(User::class, 20)->create();  //para autocompletar con valores
+////////////////////////////////prueba de datatable
+
     }
 }

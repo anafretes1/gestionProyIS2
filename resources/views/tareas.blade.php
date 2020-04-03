@@ -37,16 +37,6 @@
                                     value="{{ old('prioridad_tarea') }}"
                                 />
                             </div>
-                            <!--<div class="form-group">
-                                <label for="estado_tarea">Estado</label>
-                                <input 
-                                    type="text" 
-                                    name="estado_tarea" 
-                                    placeholder="Estado de la tarea" 
-                                    class="form-control mb-2" 
-                                    value="{{ old('estado_tarea') }}"
-                                />
-                            </div>-->
                             <div class="form-group">
                                 <label for="estado_tarea">Estado</label>
                                 <select class="form-control" name="estado_tarea" >
@@ -76,7 +66,7 @@
                                     value="{{ old('observacion_tarea') }}"
                                     />
                             </div>
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <label for="id_padre_tarea">Tarea Padre</label>
                                 <input  
                                     type="text" 
@@ -85,7 +75,16 @@
                                     class="form-control mb-2" 
                                     value="{{ old('id_padre_tarea') }}"
                                 />
-                            </div>
+                            </div>-->
+                            <div class="form-group">
+                                <label for="id_padre_tarea">Tarea padre</label>
+                                <select class="form-control mb-2" name="id_padre_tarea" >
+                                    <option value="">-- Asignar tarea --</option>
+                                    @foreach ($tareas as $key)
+                                        <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>   
                             <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
                         </form>
                     

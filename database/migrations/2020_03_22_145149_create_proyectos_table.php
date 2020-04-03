@@ -19,9 +19,8 @@ class CreateProyectosTable extends Migration
             $table->text('descripcion_proyecto');
             $table->date('fecha_inicio');
             $table->date('fecha_fin_estimada');
-            $table->integer('anho_proyecto');
             $table->string('estado_proyecto');
-            $table->integer('id_fase');
+            $table->integer('id_tarea')->nullable($value = true);
             $table->timestamps();
         });
     }

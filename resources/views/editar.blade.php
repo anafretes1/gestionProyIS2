@@ -21,20 +21,17 @@
                                     El nombre es obligatorio
                                 </div>
                             @enderror
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Nombre" class="form-control mb-2" value="{{ $permisos->name }}">
+                                value="{{ $permisos->descripcion_permiso }}">
+                                <div class="justify-content-end">
 
-                            @error('descripcion')
-                                <div class="alert alert-danger">
-                                    La descripción es obligatoria
+                                    <button class="btn btn-success btn-block" type="submit">Editar</button>
                                 </div>
-                            @enderror
-
-                            <input type="text" name="nombre_permiso" placeholder="Nombre" class="form-control mb-2" value="{{ $permisos->nombre_permiso }}">
-                            <input type="text" name="descripcion_permiso" placeholder="Descripcion" class="form-control mb-2" 
-                            value="{{ $permisos->descripcion_permiso }}">
-                            <button class="btn btn-success btn-block" type="submit">Editar</button>
+                            </div>
                         </form>
-                        </div>
                     </div>
+                </div>
                     <a href="{{ url('administracion/permisos') }}" class="btn btn-primary">ATRAS</a>
                 </div>
             </div>

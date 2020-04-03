@@ -6,6 +6,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+////////////////////////////////prueba de datatable
+Route::get('/prueba', function () {
+    $users = App\User::all();//add prueba
+    return view('pruebaProyecto',compact('users'));//add compact prueba
+});
+
+
+//////////////////////////////////////////
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('inicio');

@@ -2,7 +2,7 @@
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-16">
+      <div class="col-md-8">
         <div class="card">
           <div class="card-header"><h1>Editar Proyecto</h1></div>
             <div class="card-body">
@@ -43,10 +43,6 @@
                     <input type="text" name="fecha_fin_estimada" placeholder="Fecha Fin estimada" class="form-control mb-2" value="{{ $proyectos->fecha_fin_estimada }}">
                 </div>
                 <div class="form-group">
-                  <label for="anho_proyecto">Año</label>
-                    <input type="number"  name="anho_proyecto" placeholder="Año del Proyecto" class="form-control mb-2"  value="{{ old('anho_proyecto') }}"/>
-                </div>
-                <div class="form-group">
                   <label for="estado_proyecto">Estado</label>
                       <select class="form-control" name="estado_proyecto" >
                         <option value="">-- Asignar el estado --</option>
@@ -56,9 +52,15 @@
                         </select>
                   </div>
                 <div class="form-group">
-                  <label for="nombre_proyecto">Nombre</label>
-                    <input type="text" name="id_fase" placeholder="Fase" class="form-control mb-2" value="{{ $proyectos->id_fase }}">
-                </div>
+                  <label for="id_tarea">Tarea</label>
+                  <select class="form-control" name="id_tarea" >
+                    <option value="">-- Asignar tarea --</option>
+                    @foreach ($tareas as $key)
+                      <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
+                    @endforeach
+                  </select>
+                </div> 
+
                 <button class="btn btn-warning btn-block mb-2" type="submit">Editar</button>
               </form>
             </div>

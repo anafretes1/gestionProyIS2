@@ -76,26 +76,6 @@
                                     />
                                 </div>
                                 <div class="form-group">
-                                    <label for="anho_proyecto">Año</label>
-                                    <input 
-                                        type="number" 
-                                        name="anho_proyecto" 
-                                        placeholder="Año" 
-                                        class="form-control mb-2" 
-                                        value="{{ old('anho_proyecto') }}"
-                                    />
-                                </div>
-                               <!-- <div class="form-group">
-                                    <label for="estado_proyecto">Estado del Proyecto</label>
-                                    <input 
-                                        type="text" 
-                                        name="estado_proyecto" 
-                                        placeholder="Estado del Proyecto" 
-                                        class="form-control mb-2" 
-                                        value="{{ old('estado_proyecto') }}"
-                                    />
-                                </div>-->
-                                <div class="form-group">
                                     <label for="estado_proyecto">Estado</label>
                                     <select class="form-control" name="estado_proyecto" >
                                         <option value="">-- Escoja el estado --</option>
@@ -105,14 +85,13 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="fecha_fin_estimada">Fase relacionada</label>
-                                    <input 
-                                        type="number" 
-                                        name="id_fase" 
-                                        placeholder="Fase relacionada" 
-                                        class="form-control mb-2" 
-                                        value="{{ old('id_fase') }}"
-                                    />
+                                    <label for="id_tarea">Tarea</label>
+                                    <select class="form-control" name="id_tarea" >
+                                        <option value="">-- Asignar tarea --</option>
+                                        @foreach ($tareas as $key)
+                                            <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>   
                                 <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
                             </form>
@@ -125,9 +104,8 @@
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Fecha Inicio</th>
                                         <th scope="col">Fecha Fin</th>
-                                        <th scope="col">Año</th>
                                         <th scope="col">Estado</th>
-                                        <th scope="col">Fase</th>
+                                        <th scope="col">Tarea</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -138,9 +116,8 @@
                                         <td>{{$item->descripcion_proyecto }}</td>
                                         <td>{{$item->fecha_inicio }}</td>
                                         <td>{{$item->fecha_fin_estimada }}</td>
-                                        <td>{{$item->anho_proyecto }}</td>
                                         <td>{{$item->estado_proyecto }}</td>
-                                        <td>{{$item->id_fase }}</td>
+                                        <td>{{$item->id_tarea }}</td>
                                         <td><a href="{{ route('proyectos.editarProyecto', $item) }}" class="btn btn-warning btn-sm">Editar</a>
                                             <form action="{{ route('proyectos.eliminarProyecto', $item) }}" method="POST" class="d-inline"> 
                                                 @method('DELETE')
