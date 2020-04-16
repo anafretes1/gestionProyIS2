@@ -35,13 +35,13 @@
                             <div class="form-group">
                                 <label for="version_tarea">Version</label>
                                 <input type="text" name="version_tarea" 
-                                    placeholder="Version" class="form-control mb-2" 
+                                    placeholder="Version de la tarea" class="form-control mb-2" 
                                     value="{{ $tareas->version_tarea }}">
                             </div>
                             <div class="form-group">
                                 <label for="prioridad_tarea">Prioridad</label>
                                 <input type="text" name="prioridad_tarea" 
-                                placeholder="Prioridad" class="form-control mb-2" 
+                                placeholder="Prioridad de la tarea" class="form-control mb-2" 
                                 value="{{ $tareas->prioridad_tarea }}">
                             </div>
                             <div class="form-group">
@@ -56,7 +56,7 @@
                             <div class="form-group">
                                 <label for="descripcion_tarea">Descripción</label>
                                 <input type="text" name="descripcion_tarea" 
-                                    placeholder="Descripcion" class="form-control mb-2" 
+                                    placeholder="Descripcion de la tarea" class="form-control mb-2" 
                                     value="{{ $tareas->descripcion_tarea }}">
                             </div>
                             <div class="form-group">

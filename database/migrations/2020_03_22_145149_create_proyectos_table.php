@@ -19,9 +19,13 @@ class CreateProyectosTable extends Migration
             $table->text('descripcion_proyecto');
             $table->date('fecha_inicio');
             $table->date('fecha_fin_estimada');
-            $table->string('estado_proyecto');
-            $table->integer('id_tarea')->nullable($value = true);
+            $table->foreignId('estado_id',20);
+            $table->foreignId('tarea_id',20)->nullable($value = true);
+
+            $table->bigInteger('lineabase_id')-unsigned();
             $table->timestamps();
+
+            $table->foreign('lineabase_id')->references('id')->on('linea_bases')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

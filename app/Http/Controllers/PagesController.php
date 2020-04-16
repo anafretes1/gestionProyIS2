@@ -31,9 +31,8 @@ class PagesController extends Controller
         $proyectos = App\Proyecto::paginate(3);
         $estados = App\Estado::all();
         $tareas = App\Tarea::all();
-
-       // $estadosProy = $estados->pluck('name');
-
+        //$prueba = App\Proyecto::find(3)->estado;// busca  el id del estado al proyecto
+        
         return view('proyectos',compact('proyectos','estados','tareas'));
     }
     public function tareas(){
@@ -50,6 +49,15 @@ class PagesController extends Controller
     public function configuracion(){
         return view('configuracion');
     }
+
+    public function lineasBases(){
+        $lineasbases = App\LineaBase::paginate(3);
+        $proyectos = App\Proyecto::all();
+        $tareas = App\Tarea::all();
+        return view('lineasBases',compact('proyectos','tareas','lineasbases'));
+    }
+
+
     public function crear(Request $request)
     {
         // return $request->all();
@@ -89,8 +97,8 @@ class PagesController extends Controller
         $proyectoNuevo->descripcion_proyecto = $request->descripcion_proyecto;
         $proyectoNuevo->fecha_inicio = $request->fecha_inicio;
         $proyectoNuevo->fecha_fin_estimada = $request->fecha_fin_estimada;
-        $proyectoNuevo->estado_proyecto = $request->estado_proyecto;
-        $proyectoNuevo->id_tarea = $request->id_tarea;
+        $proyectoNuevo->estado_id = $request->estado_id;
+        $proyectoNuevo->tarea_id = $request->tarea_id;
         //dd($proyectoNuevo);
         $proyectoNuevo->save();
         return back()->with('mensaje', 'Proyecto agregado!!!');
@@ -103,7 +111,7 @@ class PagesController extends Controller
         $tareaNuevo->estado_tarea = $request->estado_tarea;
         $tareaNuevo->descripcion_tarea = $request->descripcion_tarea;
         $tareaNuevo->observacion_tarea = $request->observacion_tarea;
-        $tareaNuevo->id_padre_tarea = $request->id_padre_tarea;
+        $tareaNuevo->tarea_id = $request->tarea_id;
         $tareaNuevo->save();
         return back()->with('mensaje', 'Tarea agregada!!!');
     }
@@ -116,6 +124,18 @@ class PagesController extends Controller
         $estadoNuevo->nombre = $request->nombre;
         $estadoNuevo->save();
         return back()->with('mensaje', 'Estado agregado!!!');
+    }
+    public function crearLineaBase(Request $request)
+    { 
+        $request->validate([
+            'nombre' => 'required'
+        ]);
+        $lineabaseNuevo = new App\LineaBase;
+        $lineabaseNuevo->nombre = $request->nombre;
+        $lineabaseNuevo->proyecto_id = $request->proyecto_id;
+        $lineabaseNuevo->tarea_id = $request->tarea_id;
+        $lineabaseNuevo->save();
+        return back()->with('mensaje', 'Linea Base agregada!!!');
     }
 
                                         //SECCION EDITAR
@@ -163,8 +183,8 @@ class PagesController extends Controller
         $proyectoUpdate->descripcion_proyecto = $request->descripcion_proyecto;
         $proyectoUpdate->fecha_inicio = $request->fecha_inicio;
         $proyectoUpdate->fecha_fin_estimada = $request->fecha_fin_estimada;
-        $proyectoUpdate->estado_proyecto = $request->estado_proyecto;
-        $proyectoUpdate->id_tarea = $request->id_tarea;
+        $proyectoUpdate->estado_id = $request->estado_id;
+        $proyectoUpdate->tarea_id = $request->tarea_id;
         //dd($proyectoUpdate);
 
         $proyectoUpdate->save();
@@ -185,7 +205,7 @@ class PagesController extends Controller
         $tareaUpdate->estado_tarea = $request->estado_tarea;
         $tareaUpdate->descripcion_tarea = $request->descripcion_tarea;
         $tareaUpdate->observacion_tarea = $request->observacion_tarea;
-        $tareaUpdate->id_padre_tarea = $request->id_padre_tarea;
+        $tareaUpdate->tarea_id = $request->tarea_id;
         $tareaUpdate->save();
             return back()->with('mensaje', 'Tarea Editada!!!');
     }
@@ -201,6 +221,27 @@ class PagesController extends Controller
         $estadoUpdate->save();
             return back()->with('mensaje', 'Estado Editado!!!');
     }
+    public function editarLineaBase($id)
+    {
+        $lineasbases = App\LineaBase::findOrFail($id);
+        $proyectos = App\Proyecto::all();
+        $tareas = App\Tarea::all();
+
+        return view('editarLineaBase', compact('proyectos','tareas','lineasbases'));
+    }                         
+    public function updateLineaBase(Request $request, $id)
+    {
+        $lineabaseUpdate = App\LineaBase::findOrFail($id);
+        $lineabaseUpdate->nombre = $request->nombre;
+        $lineabaseUpdate->proyecto_id = $request->proyecto_id;
+        $lineabaseUpdate->tarea_id = $request->tarea_id;
+        $lineabaseUpdate->save();
+            return back()->with('mensaje', 'Linea base Editada!!!');
+    }
+
+
+
+
                         //SECCION ELIMINAR
     public function eliminar($id)
     {
@@ -232,7 +273,12 @@ class PagesController extends Controller
         $estadoEliminar->delete();
         return back()->with('mensaje', 'Estado Eliminado!!!');
     }
-
+    public function eliminarLineaBase($id)
+    {
+        $lineabaseEliminar = App\LineaBase::findOrFail($id);
+        $lineabaseEliminar->delete();
+        return back()->with('mensaje', 'Linea Base Eliminada!!!');
+    }
 
 
 

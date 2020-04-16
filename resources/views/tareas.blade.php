@@ -77,8 +77,8 @@
                                 />
                             </div>-->
                             <div class="form-group">
-                                <label for="id_padre_tarea">Tarea padre</label>
-                                <select class="form-control mb-2" name="id_padre_tarea" >
+                                <label for="tarea_id">Tarea padre</label>
+                                <select class="form-control mb-2" name="tarea_id" >
                                     <option value="">-- Asignar tarea --</option>
                                     @foreach ($tareas as $key)
                                         <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
@@ -111,7 +111,7 @@
                                 <td>{{$item->estado_tarea }}</td>
                                 <td>{{$item->descripcion_tarea }}</td>
                                 <td>{{$item->observacion_tarea }}</td>
-                                <td>{{$item->id_padre_tarea }}</td>
+                                <td>{{$item->tarea_id }}</td>
                                 <td><a href="{{ route('tareas.editarTarea', $item) }}" class="btn btn-warning btn-sm">Editar</a>
                                     <form action="{{ route('tareas.eliminarTarea', $item) }}" method="POST" class="d-inline"> 
                                         @method('DELETE')

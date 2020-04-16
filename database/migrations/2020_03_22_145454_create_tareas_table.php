@@ -17,10 +17,11 @@ class CreateTareasTable extends Migration
             $table->increments('id');
             $table->string('version_tarea');
             $table->string('prioridad_tarea');
+            //$table->enum('estado_tarea', ['Iniciado', 'Pendiente','Finalizado']);
             $table->string('estado_tarea');
             $table->string('descripcion_tarea');
             $table->string('observacion_tarea');
-            $table->string('id_padre_tarea')->nullable($value = true);
+            $table->foreignId('tarea_id',20)->nullable($value = true);
             $table->timestamps();
         });
     }

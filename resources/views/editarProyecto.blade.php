@@ -43,17 +43,17 @@
                     <input type="text" name="fecha_fin_estimada" placeholder="Fecha Fin estimada" class="form-control mb-2" value="{{ $proyectos->fecha_fin_estimada }}">
                 </div>
                 <div class="form-group">
-                  <label for="estado_proyecto">Estado</label>
-                      <select class="form-control" name="estado_proyecto" >
+                  <label for="estado_id">Estado</label>
+                      <select class="form-control" name="estado_id" >
                         <option value="">-- Asignar el estado --</option>
                           @foreach ($estados as $key)
-                            <option value="{{ $key['nombre'] }}">{{ $key['nombre'] }}</option>
+                            <option value="{{ $key['id'] }}">{{ $key['nombre'] }}</option>
                           @endforeach
                         </select>
                   </div>
                 <div class="form-group">
-                  <label for="id_tarea">Tarea</label>
-                  <select class="form-control" name="id_tarea" >
+                  <label for="tarea_id">Tarea</label>
+                  <select class="form-control" name="tarea_id" >
                     <option value="">-- Asignar tarea --</option>
                     @foreach ($tareas as $key)
                       <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>

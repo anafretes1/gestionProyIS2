@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-16">
                 <div class="card">
-                    <div class="card-header" ><h1>Proyectos</h1></div>
+                    <div class="card-header" ><h1>Prueba de Proyectos</h1></div>
                         <div class="card-body">
                             @if ( session('mensaje') )
                                 <div class="alert alert-success">
@@ -84,7 +84,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label for="tarea_id">Tarea</label>
                                     <select class="form-control" name="tarea_id" >
                                         <option value="">-- Asignar tarea --</option>
@@ -92,7 +92,7 @@
                                             <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
                                         @endforeach
                                     </select>
-                                </div>   
+                                </div> -->  
                                 <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
                             </form>
                         
@@ -117,7 +117,7 @@
                                         <td>{{$item->fecha_inicio }}</td>
                                         <td>{{$item->fecha_fin_estimada }}</td>
                                         <td>{{$item->estado_id }}</td>
-                                        <td>{{$item->tarea_id }}</td>
+                                        <td><a href="{{ url('prueba1/pruebaProyectoTarea') }}" class="btn btn-success">ADD</a></td>
                                         <td><a href="{{ route('proyectos.editarProyecto', $item) }}" class="btn btn-warning btn-sm">Editar</a>
                                             <form action="{{ route('proyectos.eliminarProyecto', $item) }}" method="POST" class="d-inline"> 
                                                 @method('DELETE')

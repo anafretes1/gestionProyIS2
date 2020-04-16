@@ -2,15 +2,56 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+  //  return view('home');
+//});
 
 ////////////////////////////////prueba de datatable
-Route::get('/prueba', function () {
-    $users = App\User::all();//add prueba
-    return view('pruebaProyecto',compact('users'));//add compact prueba
+
+
+Route::get('/prueba2', function () {                
+    $proyectos = App\Estado::find(2)->proyectos;// VERIFICADO: TRAE TODOS LOS PROYECTOS CON EL ESTADO_ID=3
+    //return  $proyectos;
+
+    $estado = App\Proyecto::find(5)->estado->nombre;
+    return  $estado;
 });
+
+Route::get('/prueba3', function () {                
+    $proyectos = App\Tarea::find(7)->proyecto;// VERIFICADO: TRAE TODOS LOS PROYECTOS CON EL ESTADO_ID=3
+    //return  $proyectos;
+    $tarea = App\Proyecto::find(8)->tareas;// VERIFICADO: TRAE TODOS LOS PROYECTOS CON EL ESTADO_ID=3
+    return  $tarea;
+});
+
+//$proyecto = App\Proyecto::find(3)->proyectos;
+//return view('detalle',compact('proyecto'));
+       //dd($tareas);
+       //echo $tareas->tareas(7)->descripcion_tarea;
+
+Route::get('/detalle', function () {
+    $tareas = App\Tarea::all();//add prueba
+    $estado = App\Proyecto::find(5)->estado->nombre;
+    
+    return view('detalle',compact('tareas','estado'));
+});
+
+
+//prueba de agregar varias tareas a un proyecto
+Route::get('/prueba1', function () {
+    $proyectos = App\Proyecto::paginate(3);
+    $estados = App\Estado::all();
+    $tareas = App\Tarea::all();
+    return view('pruebas/pruebaProyecto',compact('proyectos','estados','tareas'));
+});
+Route::get('/prueba1/pruebaProyectoTarea', function () {
+    $proyectos = App\Proyecto::paginate(3);
+    $estados = App\Estado::all();
+    $tareas = App\Tarea::all();
+    return view('pruebas/pruebaProyectoTarea',compact('proyectos','estados','tareas'));
+});
+
+
 
 
 //////////////////////////////////////////
@@ -45,7 +86,17 @@ Route::get('desarrollo', 'PagesController@desarrollo')->name('desarrollo');
 
     Route::get('desarrollo/estados', 'PagesController@estados')->name('estado');
     Route::post('desarrollo/estados', 'PagesController@crearEstado')->name('estados.crearEstado');
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::get('configuracion', 'PagesController@configuracion')->name('config');
 
+    Route::get('configuracion/lineasbases', 'PagesController@lineasBases')->name('lineaBase');
+    Route::post('configuracion/lineasbases', 'PagesController@crearLineaBase')->name('lineasBases.crearLineaBase');
+
+Route::get('/editarLineaBase/{id}', 'PagesController@editarLineaBase' )->name('lineasBases.editarLineaBase');
+Route::put('editarLineaBase/{id}', 'PagesController@updateLineaBase' )->name('lineasBases.updateLineaBase');
+Route::delete('/eliminarLineaBase/{id}', 'PagesController@eliminarLineaBase')->name('lineasBases.eliminarLineaBase');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::get('/editar/{id}', 'PagesController@editar' )->name('permisos.editar');
 Route::put('editar/{id}', 'PagesController@update' )->name('permisos.update');
 
@@ -74,7 +125,6 @@ Route::delete('/eliminarEstado/{id}', 'PagesController@eliminarEstado')->name('e
 
 
 
-Route::get('configuracion', 'PagesController@configuracion')->name('config');
 
 //////////////////////////////////////////////////////prueba login
 Route::resource('usuarios', 'UsersController');
