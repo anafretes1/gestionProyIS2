@@ -37,23 +37,26 @@
                                     />
                                 </div>
                                 <div class="form-group">
-                                    <label for="proyecto_id">Proyecto</label>
-                                    <select class="form-control" name="proyecto_id" >
-                                        <option value="">-- Asignar el Proyecto --</option>
-                                        @foreach ($proyectos as $key)
-                                            <option value="{{ $key['id'] }}">{{ $key['nombre_proyecto'] }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="fecha_inicio">Fecha de Inicio</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_inicio" 
+                                        placeholder="Fecha de Inicio" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('fecha_inicio') }}"
+                                    />
                                 </div>
                                 <div class="form-group">
-                                    <label for="tarea_id">Tarea</label>
-                                    <select class="form-control" name="tarea_id" >
-                                        <option value="">-- Asignar tarea --</option>
-                                        @foreach ($tareas as $key)
-                                            <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>   
+                                    <label for="fecha_inicio">Fecha Fin</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_fin" 
+                                        placeholder="Fecha Fin" 
+                                        class="form-control mb-2" 
+                                        value="{{ old('fecha_fin') }}"
+                                    />
+                                </div>
+                               
                                 <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
                             </form>
                         
@@ -62,8 +65,8 @@
                                     <tr>
                                         <th scope="col">#Id</th>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">Proyecto</th>
-                                        <th scope="col">Tarea</th>
+                                        <th scope="col">Fecha Inicio</th>
+                                        <th scope="col">Fecha Fin</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -71,19 +74,20 @@
                                     <tr>
                                         <th scope="row">{{$item->id }}</th><!--Nombre de los campos de las tablas-->
                                         <td>{{$item->nombre }}</td>
-                                        <td>{{$item->proyecto_id }}</td>
-                                        <td>{{$item->tarea_id }}</td>
+                                        <td>{{$item->fecha_inicio }}</td>
+                                        <td>{{$item->fecha_fin }}</td>
                                         <td><a href="{{ route('lineasBases.editarLineaBase', $item) }}" class="btn btn-warning btn-sm">Editar</a>
                                             <form action="{{ route('lineasBases.eliminarLineaBase', $item) }}" method="POST" class="d-inline"> 
                                                 @method('DELETE')
                                                 @csrf
                                                 <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
                                             </form>
+                                            <a href="{{ route('lineasBases.verLineaBase', $item) }}" class="btn btn-success btn-sm">Ver</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </table>
-                            <a href="{{ url('configuracion') }}" class="btn btn-primary">ATRAS</a>
+                            <a href="{{ url('configuracion') }}" class="btn btn-dark">ATRAS</a>
                         </div>
                     </div>
                     {{ $lineasbases->links() }}<!--Boton de paginacion-->

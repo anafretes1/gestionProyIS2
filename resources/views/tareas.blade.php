@@ -85,6 +85,21 @@
                                     @endforeach
                                 </select>
                             </div>   
+
+                            <!-- 29/04/2020-->
+                            <div class="form-group">
+                                <label for="fecha_inicio">Fecha Inicio</label>
+                                <input type="date" name="fecha_inicio" placeholder="Fecha Inicio" class="form-control mb-2" value="{{ old('fecha_inicio') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_fin">Fecha Fin</label>
+                                <input type="date" name="fecha_fin" placeholder="Fecha Fin estimada" class="form-control mb-2" value="{{ old('fecha_fin') }}">
+                            </div>
+                            <!-- 29/04/2020-->
+
+
+
+
                             <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
                         </form>
                     
@@ -99,6 +114,8 @@
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Observación</th>
                                     <th scope="col">Tarea Padre</th>
+                                    <th scope="col">Inicio</th>
+                                    <th scope="col">Fin</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -112,6 +129,9 @@
                                 <td>{{$item->descripcion_tarea }}</td>
                                 <td>{{$item->observacion_tarea }}</td>
                                 <td>{{$item->tarea_id }}</td>
+                                <td>{{$item->fecha_inicio }}</td>
+                                <td>{{$item->fecha_fin }}</td>
+
                                 <td><a href="{{ route('tareas.editarTarea', $item) }}" class="btn btn-warning btn-sm">Editar</a>
                                     <form action="{{ route('tareas.eliminarTarea', $item) }}" method="POST" class="d-inline"> 
                                         @method('DELETE')
@@ -125,7 +145,6 @@
                                 </table>
                                     <a href="{{ url('desarrollo') }}" class="btn btn-primary">ATRAS</a>
                                 </div>
-                                {{ $tareas->links() }}<!--Boton de paginacion-->
                             </div>
                     </div>
                 </div>

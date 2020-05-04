@@ -14,10 +14,10 @@ class CreateLineaBasesTable extends Migration
     public function up()
     {
         Schema::create('linea_bases', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('nombre');
-            $table->foreignId('proyecto_id',20);
-            $table->foreignId('tarea_id',20);
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
             $table->timestamps();
         });
     }
@@ -29,6 +29,7 @@ class CreateLineaBasesTable extends Migration
      */
     public function down()
     {
+       
         Schema::dropIfExists('linea_bases');
     }
 }

@@ -15,14 +15,22 @@ class CreateTareasTable extends Migration
     {
         Schema::create('tareas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('proyecto_id')->unsigned()->nullable();
             $table->string('version_tarea');
             $table->string('prioridad_tarea');
-            //$table->enum('estado_tarea', ['Iniciado', 'Pendiente','Finalizado']);
             $table->string('estado_tarea');
             $table->string('descripcion_tarea');
             $table->string('observacion_tarea');
-            $table->foreignId('tarea_id',20)->nullable($value = true);
+            $table->integer('tarea_id')->unsigned()->nullable();
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
+            $table->integer('base_id')->unsigned()->nullable();
             $table->timestamps();
+
+                $table->foreign('proyecto_id')->references('id')->on('proyectos');
+                $table->foreign('tarea_id')->references('id')->on('tareas');
+                $table->foreign('base_id')->references('id')->on('linea_bases');
+       
         });
     }
 
@@ -33,6 +41,8 @@ class CreateTareasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tareas');
+
+       Schema::dropIfExists('tareas');
+       Schema::dropIfExists('linea_bases');
     }
 }

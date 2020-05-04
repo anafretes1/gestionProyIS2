@@ -36,9 +36,8 @@ class PagesController extends Controller
         return view('proyectos',compact('proyectos','estados','tareas'));
     }
     public function tareas(){
-        $tareas = App\Tarea::paginate(3);
+        $tareas = App\Tarea::all();
         $estados = App\Estado::all();
-
         return view('tareas',compact('tareas','estados'));
     }
     public function estados(){
@@ -55,6 +54,12 @@ class PagesController extends Controller
         $proyectos = App\Proyecto::all();
         $tareas = App\Tarea::all();
         return view('lineasBases',compact('proyectos','tareas','lineasbases'));
+    }
+
+    public function agregarTarea(){
+        $proyectos = App\Proyecto::findOrFail($id);
+
+        return view('agregarTarea',compact('proyectos'));
     }
 
 
@@ -98,7 +103,8 @@ class PagesController extends Controller
         $proyectoNuevo->fecha_inicio = $request->fecha_inicio;
         $proyectoNuevo->fecha_fin_estimada = $request->fecha_fin_estimada;
         $proyectoNuevo->estado_id = $request->estado_id;
-        $proyectoNuevo->tarea_id = $request->tarea_id;
+        //$proyectoNuevo->lineabase_id = $request->lineabase_id;
+        //$proyectoNuevo->tarea_id = $request->tarea_id;
         //dd($proyectoNuevo);
         $proyectoNuevo->save();
         return back()->with('mensaje', 'Proyecto agregado!!!');
@@ -112,6 +118,8 @@ class PagesController extends Controller
         $tareaNuevo->descripcion_tarea = $request->descripcion_tarea;
         $tareaNuevo->observacion_tarea = $request->observacion_tarea;
         $tareaNuevo->tarea_id = $request->tarea_id;
+        $tareaNuevo->fecha_inicio = $request->fecha_inicio;
+        $tareaNuevo->fecha_fin = $request->fecha_fin;
         $tareaNuevo->save();
         return back()->with('mensaje', 'Tarea agregada!!!');
     }
@@ -132,8 +140,10 @@ class PagesController extends Controller
         ]);
         $lineabaseNuevo = new App\LineaBase;
         $lineabaseNuevo->nombre = $request->nombre;
-        $lineabaseNuevo->proyecto_id = $request->proyecto_id;
-        $lineabaseNuevo->tarea_id = $request->tarea_id;
+        $lineabaseNuevo->fecha_inicio = $request->fecha_inicio;
+        $lineabaseNuevo->fecha_fin = $request->fecha_fin;
+        //$lineabaseNuevo->proyecto_id = $request->proyecto_id;
+        //$lineabaseNuevo->tarea_id = $request->tarea_id;
         $lineabaseNuevo->save();
         return back()->with('mensaje', 'Linea Base agregada!!!');
     }
@@ -184,7 +194,7 @@ class PagesController extends Controller
         $proyectoUpdate->fecha_inicio = $request->fecha_inicio;
         $proyectoUpdate->fecha_fin_estimada = $request->fecha_fin_estimada;
         $proyectoUpdate->estado_id = $request->estado_id;
-        $proyectoUpdate->tarea_id = $request->tarea_id;
+        //$proyectoUpdate->tarea_id = $request->tarea_id;
         //dd($proyectoUpdate);
 
         $proyectoUpdate->save();
@@ -195,20 +205,153 @@ class PagesController extends Controller
     {
         $tareas = App\Tarea::findOrFail($id);
         $estados = App\Estado::all();//->pluck('nombre');
-        return view('editarTarea', compact('tareas','estados'));
+        $proyectos = App\Proyecto::all();//agregado para prueba de asignacion
+        $tareasTodo = App\Tarea::all();//->pluck('nombre');
+
+        return view('editarTarea', compact('tareas','estados','proyectos','tareasTodo'));
     }  
     public function updateTarea(Request $request, $id)
     {
         $tareaUpdate = App\Tarea::findOrFail($id);
+        $tareaUpdate->proyecto_id = $request->proyecto_id;
         $tareaUpdate->version_tarea = $request->version_tarea;
         $tareaUpdate->prioridad_tarea = $request->prioridad_tarea;
         $tareaUpdate->estado_tarea = $request->estado_tarea;
         $tareaUpdate->descripcion_tarea = $request->descripcion_tarea;
         $tareaUpdate->observacion_tarea = $request->observacion_tarea;
         $tareaUpdate->tarea_id = $request->tarea_id;
+        $tareaUpdate->fecha_inicio = $request->fecha_inicio;
+        $tareaUpdate->fecha_fin = $request->fecha_fin;
         $tareaUpdate->save();
             return back()->with('mensaje', 'Tarea Editada!!!');
     }
+//PRUEBA - EDITAR EL ESTADO DE LA TAREA ---    ELIMINAR
+/*
+public function editarTareaProyecto( $idProyecto)
+{
+    $proyecto = App\Proyecto::findOrFail($idProyecto);// devuelve datos del proyecto
+    $tareas = App\Tarea::findOrFail($idProyecto);//este esta mal no se puede utilizar el mismo id para proyectos y tareas
+    $tareasAll = App\Tarea::all();  //todas las tareas
+    $estados = App\Estado::all();//->pluck('nombre');
+    //$tareass = $tareas->proyecto;
+    $tareasAsignadas = $proyecto->tareas; // las tareas correspondientes al id del proyecto recibido
+    //echo $tareasAsignadas;
+   //echo $tareass;
+   // echo  $proyecto->tareas;
+    return view('editarTareaProyecto', compact('tareas','tareasAsignadas','proyecto','tareasAll','estados'));
+}  
+public function updateTareaProyecto(Request $request, $idTarea)//recibe id de tarea
+{
+    
+    $tareaUpdate = App\Tarea::findOrFail($idTarea);
+    //$tareaUpdate = $tareaUpda->tareas; 
+    $tareaUpdate->proyecto_id = $request->$idTarea;
+    //echo($tareaUpdate);
+
+    //$tareaUpdate->version_tarea = $request->version_tarea;
+    //$tareaUpdate->prioridad_tarea = $request->prioridad_tarea;
+    //$tareaUpdate->estado_tarea = $request->estado_tarea;
+    //$tareaUpdate->descripcion_tarea = $request->descripcion_tarea;
+    //$tareaUpdate->observacion_tarea = $request->observacion_tarea;
+    //$tareaUpdate->tarea_id = $request->tarea_id;
+    //   echo $id;// retorna el id del proyecto
+      // echo $tareaUpdate;
+    $tareaUpdate->save();
+    return back()->with('mensaje', 'TAREA ASIGNADA - PROY!!!');
+        
+}*/
+public function editarTareaProyecto($id)
+{
+    $tareas = App\Tarea::findOrFail($id);
+    $estados = App\Estado::all();//->pluck('nombre');
+    $proyectos = App\Proyecto::all();//agregado para prueba de asignacion
+    $tareasTodo = App\Tarea::all();//->pluck('nombre');
+
+    return view('editarTareaProyecto', compact('tareas','estados','proyectos','tareasTodo'));
+}  
+public function updateTareaProyecto(Request $request, $id)
+{
+    $tareaUpdate = App\Tarea::findOrFail($id);
+    $tareaUpdate->proyecto_id = $request->proyecto_id;
+    $tareaUpdate->version_tarea = $request->version_tarea;
+    $tareaUpdate->prioridad_tarea = $request->prioridad_tarea;
+    $tareaUpdate->estado_tarea = $request->estado_tarea;
+    $tareaUpdate->descripcion_tarea = $request->descripcion_tarea;
+    $tareaUpdate->observacion_tarea = $request->observacion_tarea;
+    $tareaUpdate->tarea_id = $request->tarea_id;
+
+    $tareaUpdate->save();
+        return back()->with('mensaje', 'Tarea Editada!!!');
+}
+
+/////////////////asignar linea base 
+public function editarTareaLineaBase($id)
+{
+    $lineaBase = App\LineaBase::all();
+    $tareas = App\Tarea::findOrFail($id);
+    $estados = App\Estado::all();//->pluck('nombre');
+    $proyectos = App\Proyecto::all();//agregado para prueba de asignacion
+    $tareasTodo = App\Tarea::all();//->pluck('nombre');
+
+    return view('editarTareaLineaBase', compact('tareas','estados','proyectos','tareasTodo','lineaBase'));
+} 
+public function updateTareaLineaBase(Request $request, $id)
+{
+    $tareaUpdate = App\Tarea::findOrFail($id);
+    $tareaUpdate->proyecto_id = $request->proyecto_id;
+    $tareaUpdate->version_tarea = $request->version_tarea;
+    $tareaUpdate->prioridad_tarea = $request->prioridad_tarea;
+    $tareaUpdate->estado_tarea = $request->estado_tarea;
+    $tareaUpdate->descripcion_tarea = $request->descripcion_tarea;
+    $tareaUpdate->observacion_tarea = $request->observacion_tarea;
+    $tareaUpdate->tarea_id = $request->tarea_id;
+    $tareaUpdate->base_id = $request->base_id;
+    $tareaUpdate->save();
+        return back()->with('mensaje', 'Tarea Editada!!!');
+}
+
+
+
+public function eliminarTareaProyecto($id)// ver para no eliminar modificar el campo proyecto_id a NULL
+    {
+        $tareaEliminar = App\Tarea::findOrFail($id);
+        $tareaEliminar->delete();
+        return back()->with('mensaje', 'Tarea Eliminada!!!');
+    }
+
+    
+public function asignaciones()
+{
+    $tareas = App\Tarea::all();
+    $estados = App\Estado::all();
+    return view('asignarTareaProyecto',compact('tareas','estados'));
+}
+public function asignacionesLineaBase()
+{
+    $tareas = App\Tarea::all();
+    $estados = App\Estado::all();
+    return view('asignarTareaLineaBase',compact('tareas','estados'));
+}
+/*
+public function statusLineaBase()
+{
+    $tareas = App\Tarea::all();
+    $base = App\LineaBase::all();// datos de la linea base
+    $tareasProyecto = App\Proyecto::findOrFail(1)->tareas;// todas las tareas asignadas al proyecto id=1
+
+    echo  $baseTarea;
+    //return view('pruebas/statusLineaBase',compact('tareas','estados'));
+}
+*/
+
+/////////////////////////////////////////////
+
+
+
+
+
+
+
     public function editarEstado($id)
     {
         $estados = App\Estado::findOrFail($id);
@@ -233,8 +376,10 @@ class PagesController extends Controller
     {
         $lineabaseUpdate = App\LineaBase::findOrFail($id);
         $lineabaseUpdate->nombre = $request->nombre;
-        $lineabaseUpdate->proyecto_id = $request->proyecto_id;
-        $lineabaseUpdate->tarea_id = $request->tarea_id;
+        $lineabaseUpdate->fecha_inicio = $request->fecha_inicio;
+        $lineabaseUpdate->fecha_fin = $request->fecha_fin;
+        //$lineabaseUpdate->proyecto_id = $request->proyecto_id;
+        //$lineabaseUpdate->tarea_id = $request->tarea_id;
         $lineabaseUpdate->save();
             return back()->with('mensaje', 'Linea base Editada!!!');
     }
@@ -279,6 +424,26 @@ class PagesController extends Controller
         $lineabaseEliminar->delete();
         return back()->with('mensaje', 'Linea Base Eliminada!!!');
     }
+
+
+
+// Prueba status de las lineas bases 04/05/2020
+
+public function verLineaBase($id)
+    {
+        $lineasbases = App\LineaBase::findOrFail($id);// datos sobre la linea base con id =$id
+       // $tareasProyecto = App\Proyecto::findOrFail($id)->tareas;// todas las tareas asignadas al proyecto id=1
+        //$proyecto = App\Tarea::findOrFail($id)->proyecto;//datps del proyecto asinado a la tarea id=$id
+
+        $tareasLineasBases = App\LineaBase::findOrFail($id)->tareas;// todas las tareas asignadas a la lb id=1
+        //$tareasProyecto = App\Tarea::findOrFail($id)->lineabase;//datps del proyecto asinado a la tarea id=$id
+
+        //echo $lineasbases;
+        return view('verLineaBase', compact('tareasLineasBases','lineasbases'));
+    } 
+
+
+
 
 
 

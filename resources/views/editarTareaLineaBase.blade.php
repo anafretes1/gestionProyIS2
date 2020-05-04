@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h1>Editar Tarea {{ $tareas->id }}</h1>
+                        <h1>Asignar Linea Base a Tarea: {{ $tareas->id }}</h1>
                     </div>
                     <div class="card-body">
                         @if (session('mensaje'))
@@ -13,95 +13,96 @@
                                 {{ session('mensaje') }}
                             </div>
                         @endif
-                        <form action="{{ route('tareas.updateTarea', $tareas->id) }}" method="POST">
+                        <form action="{{ route('tareas.updateTareaLineaBase', $tareas->id) }}" method="POST">
                             @method('PUT')
                             @csrf
-                            @error('version_tarea')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    La version del Proyecto es requerida
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @enderror 
-                            @if ($errors->has('descripcion_tarea'))
-                                <div class="alert alert-danger alert-dismissible fade show" >
-                                        La descripción es requerida
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
 
                             <div class="form-group">
+                                <label for="base_id"><h2>LINEA BASE</h2></label>
+                                <select class="form-control" name="base_id">
+                                    <option value="{{ $tareas->base_id }}">-- Asignar Linea Base --</option>
+                                    @foreach ($lineaBase as $key)
+                                        <option value="{{ $key['id'] }}">{{ $key['nombre'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-warning btn-block" type="submit">Asignar</button>
+                            </div>
+                            <div class="form-group">
+                                <a href="{{ url('desarrollo/asignarTareaLineaBase') }}" class="btn btn-primary">ATRAS</a>
+                            </div>
+
+
+                            <div style="visibility:hidden" class="form-group">
                                 <label for="version_tarea">Version</label>
-                                <input type="text" name="version_tarea" 
+                                <input type="hidden" name="version_tarea" 
                                     placeholder="Version de la tarea" class="form-control mb-2" 
                                     value="{{ $tareas->version_tarea }}">
                             </div>
-                            <div class="form-group">
+                            <div style="visibility:hidden" class="form-group">
                                 <label for="prioridad_tarea">Prioridad</label>
-                                <input type="text" name="prioridad_tarea" 
+                                <input type="hidden" name="prioridad_tarea" 
                                 placeholder="Prioridad de la tarea" class="form-control mb-2" 
                                 value="{{ $tareas->prioridad_tarea }}">
                             </div>
-                            <div class="form-group">
+                            
+                            
+                            <div style="visibility:hidden" class="form-group">
                                 <label for="estado_tarea">Estado</label>
-                                <select class="form-control" name="estado_tarea" >
-                                    <option value="{{ $tareas->estado_tarea }}">-- Asignar el estado --</option>
+                                <select style="visibility:hidden" class="form-control" name="estado_tarea" >
+                                    <option type="hidden" value="{{ $tareas->estado_tarea }}">-- Asignar el estado --</option>
                                     @foreach ($estados as $key)
                                         <option value="{{ $key['nombre'] }}">{{ $key['nombre'] }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+
+                            <div style="visibility:hidden" class="form-group">
+                                <label for="proyecto_id">PROYECTO</label>
+                                <select class="form-control" name="proyecto_id">
+                                    <option value="{{ $tareas->proyecto_id }}">-- Asignar Proyecto --</option>
+                                    @foreach ($proyectos as $key)
+                                        <option value="{{ $key['id'] }}">{{ $key['nombre_proyecto'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div style="visibility:hidden" class="form-group">
                                 <label for="descripcion_tarea">Descripción</label>
-                                <input type="text" name="descripcion_tarea" 
+                                <input type="hidden" name="descripcion_tarea" 
                                     placeholder="Descripcion de la tarea" class="form-control mb-2" 
                                     value="{{ $tareas->descripcion_tarea }}">
                             </div>
-                            <div class="form-group">
+                            <div style="visibility:hidden" class="form-group">
                                 <label for="observacion_tarea">Observación</label>
-                                <input type="text" name="observacion_tarea" 
+                                <input type="hidden" name="observacion_tarea" 
                                     placeholder="Observacion" class="form-control mb-2" 
                                     value="{{ $tareas->observacion_tarea }}">
                             </div>
-                            <div class="form-group">
+                            <div style="visibility:hidden" class="form-group">
                                 <label for="tarea_id">Tarea padre</label>
-                                <select class="form-control" name="tarea_id" >
+                                <select style="visibility:hidden" class="form-control" name="tarea_id" >
                                     <option value="">-- Asignar tarea --</option>
                                     @foreach ($tareasTodo as $key)
                                         <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
                                     @endforeach
                                 </select>
                             </div>  
-                            <!-- 29/04/2020-->
-                            <div class="form-group">
+                                         <!-- 29/04/2020-->
+                            <div style="visibility:hidden" class="form-group">
                                 <label for="fecha_inicio">Fecha Inicio</label>
                                 <input type="date" name="fecha_inicio" placeholder="Fecha Inicio" class="form-control mb-2" value="{{ $tareas->fecha_inicio }}">
                             </div>
-                            <div class="form-group">
+                            <div style="visibility:hidden" class="form-group">
                                 <label for="fecha_fin">Fecha Fin</label>
                                 <input type="date" name="fecha_fin" placeholder="Fecha Fin estimada" class="form-control mb-2" value="{{ $tareas->fecha_fin }}">
                             </div>
                             <!-- 29/04/2020-->
-
-                            <button class="btn btn-warning btn-block" type="submit">Editar</button>
+                            
                         </form>
                     </div>
                 </div>
-                <a href="{{ url('desarrollo/tareas') }}" class="btn btn-primary">ATRAS</a>
             </div>
         </div>
     </div>
 @endsection
-
-
-
-
-
-
-
-
-
-

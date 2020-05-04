@@ -7,6 +7,33 @@ use Illuminate\Support\Facades\Route;
 //});
 
 ////////////////////////////////prueba de datatable
+Route::get('/diagrama', function () {                
+   // $proyecto = App\Proyecto::findOrFail(2);
+   return view('pruebas/diagrama');
+    /*VERIFICADO - 24/04/2020
+    Retorna todas las tareas asignadas al proyecto con id=2*/
+});
+
+Route::get('/prueba5', function () {                
+    $proyecto = App\Proyecto::findOrFail(2);
+    return  $proyecto->tareas;
+    /*VERIFICADO - 24/04/2020
+    Retorna todas las tareas asignadas al proyecto con id=2*/
+});
+
+Route::get('/prueba6', function () {                
+    $tareas = App\Tarea::findOrFail(1);
+    return  $tareas->proyecto;
+    /*VERIFICADO - 24/04/2020
+    Retorna la info completa del proyecto que fue asignado a la tarea id=1*/
+});
+
+Route::get('/prueba7', function () {                
+    $tarea = App\Tarea::findOrFail(2);
+    return  $tarea->padre;
+    /*VERIFICADO - 24/04/2020
+    Retorna todas las tareas que heredan de la tarea padre con id=2*/
+});
 
 
 Route::get('/prueba2', function () {                
@@ -51,7 +78,15 @@ Route::get('/prueba1/pruebaProyectoTarea', function () {
     return view('pruebas/pruebaProyectoTarea',compact('proyectos','estados','tareas'));
 });
 
+Route::get('/pruebalb', function () {
+    $tareas = App\LineaBase::find(1)->tareas;
+    $lineabase = App\Tarea::find(3)->lineabase;// VERIFICADO: TRAE TODOS LOS PROYECTOS CON EL ESTADO_ID=3
+    //$lineabase = App\Tarea::find(1)->lineabase;// VERIFICADO: TRAE TODOS LOS PROYECTOS CON EL ESTADO_ID=3
 
+    return $tareas;
+
+    //return view('pruebas/statusLineaBase',compact('lineabase'));
+});
 
 
 //////////////////////////////////////////
@@ -96,6 +131,8 @@ Route::get('/editarLineaBase/{id}', 'PagesController@editarLineaBase' )->name('l
 Route::put('editarLineaBase/{id}', 'PagesController@updateLineaBase' )->name('lineasBases.updateLineaBase');
 Route::delete('/eliminarLineaBase/{id}', 'PagesController@eliminarLineaBase')->name('lineasBases.eliminarLineaBase');
 
+Route::get('/verLineaBase/{id}', 'PagesController@verLineaBase' )->name('lineasBases.verLineaBase');
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::get('/editar/{id}', 'PagesController@editar' )->name('permisos.editar');
 Route::put('editar/{id}', 'PagesController@update' )->name('permisos.update');
@@ -110,6 +147,28 @@ Route::delete('/eliminarRol/{id}', 'PagesController@eliminarRol')->name('roles.e
 Route::get('/editarProyecto/{id}', 'PagesController@editarProyecto' )->name('proyectos.editarProyecto');
 Route::put('editarProyecto/{id}', 'PagesController@updateProyecto' )->name('proyectos.updateProyecto');
 Route::delete('/eliminarProyecto/{id}', 'PagesController@eliminarProyecto')->name('proyectos.eliminarProyecto');
+
+//PRUEBA / AGREGAR TAREAS A PROYECTOS
+Route::get('/agregarTarea/{id}', 'PagesController@agregarTarea' )->name('proyectos.agregarTarea');
+//Route::get('/editarTareaProyecto/{id}', 'PagesController@editarTareaProyecto' )->name('tareas.editarTareaProyecto');
+//Route::put('editarTareaProyecto/{id}', 'PagesController@updateTareaProyecto' )->name('tareas.updateTareaProyecto');
+
+Route::get('desarrollo/asignarTareaProyecto', 'PagesController@asignaciones')->name('asignar');
+Route::get('desarrollo/editarTareaProyecto/{id}', 'PagesController@editarTareaProyecto' )->name('tareas.editarTareaProyecto');
+Route::put('desarrollo/editarTareaProyecto/{id}', 'PagesController@updateTareaProyecto' )->name('tareas.updateTareaProyecto');
+
+//ASIGNAR TAREAS A LINEA BASE
+Route::get('desarrollo/asignarTareaLineaBase', 'PagesController@asignacionesLineaBase')->name('asignarLineaBase');
+Route::get('desarrollo/editarTareaLineaBase/{id}', 'PagesController@editarTareaLineaBase' )->name('tareas.editarTareaLineaBase');
+Route::put('desarrollo/editarTareaLineaBase/{id}', 'PagesController@updateTareaLineaBase' )->name('tareas.updateTareaLineaBase');
+
+/// diagrama
+
+Route::get('desarrollo/statusLineaBase', 'PagesController@statusLineaBase')->name('statusLineaBase');
+
+
+
+
 
 //TAREAS
 Route::get('/editarTarea/{id}', 'PagesController@editarTarea' )->name('tareas.editarTarea');

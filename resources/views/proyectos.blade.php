@@ -83,7 +83,7 @@
                                             <option value="{{ $key['id'] }}">{{ $key['nombre'] }}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div><!--
                                 <div class="form-group">
                                     <label for="tarea_id">Tarea</label>
                                     <select class="form-control" name="tarea_id" >
@@ -92,7 +92,7 @@
                                             <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
                                         @endforeach
                                     </select>
-                                </div>   
+                                </div> -->  
                                 <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
                             </form>
                         
@@ -105,7 +105,7 @@
                                         <th scope="col">Fecha Inicio</th>
                                         <th scope="col">Fecha Fin</th>
                                         <th scope="col">Estado</th>
-                                        <th scope="col">Tarea</th>
+                                       <!-- <th scope="col">Tarea</th>-->  
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -117,7 +117,7 @@
                                         <td>{{$item->fecha_inicio }}</td>
                                         <td>{{$item->fecha_fin_estimada }}</td>
                                         <td>{{$item->estado_id }}</td>
-                                        <td>{{$item->tarea_id }}</td>
+                                        <!--<td>{{$item->tarea_id }}</td>-->  
                                         <td><a href="{{ route('proyectos.editarProyecto', $item) }}" class="btn btn-warning btn-sm">Editar</a>
                                             <form action="{{ route('proyectos.eliminarProyecto', $item) }}" method="POST" class="d-inline"> 
                                                 @method('DELETE')

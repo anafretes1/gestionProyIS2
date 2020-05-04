@@ -16,9 +16,5 @@ class Proyecto extends Model
         return $this->hasMany('App\Tarea');
     }
 
-    
-    public function lineabase()
-    {
-        return $this->belongsTo('App\LineaBase');
-    }
+  
 }

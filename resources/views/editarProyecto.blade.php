@@ -51,16 +51,7 @@
                           @endforeach
                         </select>
                   </div>
-                <div class="form-group">
-                  <label for="tarea_id">Tarea</label>
-                  <select class="form-control" name="tarea_id" >
-                    <option value="">-- Asignar tarea --</option>
-                    @foreach ($tareas as $key)
-                      <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
-                    @endforeach
-                  </select>
-                </div> 
-
+             
                 <button class="btn btn-warning btn-block mb-2" type="submit">Editar</button>
               </form>
             </div>

@@ -15,7 +15,7 @@
                                     </button>
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('lineasBases.updateLineaBase') }}">
+                            <form method="POST" action="{{ route('lineasBases.updateLineaBase', $lineasbases->id) }}">
                                 @method('PUT')
                                 @csrf
                                 @error('nombre')
@@ -33,26 +33,28 @@
                                         name="nombre" 
                                         placeholder="Nombre de la Linea Base" 
                                         class="form-control mb-2" 
-                                        value=""
+                                        value="{{ $lineasbases->nombre }}"
                                     />
                                 </div>
                                 <div class="form-group">
-                                    <label for="proyecto_id">Proyecto</label>
-                                    <select class="form-control" name="proyecto_id" >
-                                        <option value="">-- Asignar el Proyecto --</option>
-                                        @foreach ($proyectos as $key)
-                                            <option value="{{ $key['id'] }}">{{ $key['nombre_proyecto'] }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="fecha_inicio">Fecha de Inicio</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_inicio" 
+                                        placeholder="Fecha de Inicio" 
+                                        class="form-control mb-2" 
+                                        value="{{ $lineasbases->fecha_inicio }}"
+                                    />
                                 </div>
                                 <div class="form-group">
-                                    <label for="tarea_id">Tarea</label>
-                                    <select class="form-control" name="tarea_id" >
-                                        <option value="">-- Asignar tarea --</option>
-                                        @foreach ($tareas as $key)
-                                            <option value="{{ $key['id'] }}">{{ $key['descripcion_tarea'] }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="fecha_inicio">Fecha Fin</label>
+                                    <input 
+                                        type="date" 
+                                        name="fecha_fin" 
+                                        placeholder="Fecha Fin" 
+                                        class="form-control mb-2" 
+                                        value="{{ $lineasbases->fecha_fin }}"
+                                    />
                                 </div>   
                                 <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
                             </form>
