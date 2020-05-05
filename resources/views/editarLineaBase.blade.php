@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header" ><h1>Editar Lineas Bases</h1></div>
+                    <div class="card-header" ><h1 style="text-align: center"><b>Editar Linea Base</b></h1></div>
                         <div class="card-body">
                             @if ( session('mensaje') )
                                 <div class="alert alert-success">
@@ -56,13 +56,13 @@
                                         value="{{ $lineasbases->fecha_fin }}"
                                     />
                                 </div>   
-                                <button class="btn btn-primary btn-block mb-2" type="submit">Agregar</button>
+                                <button class="btn btn-warning btn-block mb-2" type="submit">Editar</button>
                             </form>
                         
                     
                         </div>
                     </div>
-                    <a href="{{ url('configuracion/lineasbases') }}" class="btn btn-primary">ATRAS</a>
+                    <a href="{{ url('configuracion/lineasbases') }}" class="btn btn-dark">ATRAS</a>
 
                 </div>
             </div>

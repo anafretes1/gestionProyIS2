@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header" ><h1>Lineas Bases</h1></div>
+                    <div class="card-header" ><h1 style="text-align: center"><b>Lineas bases</b></h1></div>
                         <div class="card-body">
                             @if ( session('mensaje') )
                                 <div class="alert alert-success">
@@ -67,7 +67,7 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Fecha Inicio</th>
                                         <th scope="col">Fecha Fin</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col" style="text-align: center">Acciones</th>
                                     </tr>
                                 </thead>
                                 @foreach($lineasbases as $item)
@@ -76,7 +76,7 @@
                                         <td>{{$item->nombre }}</td>
                                         <td>{{$item->fecha_inicio }}</td>
                                         <td>{{$item->fecha_fin }}</td>
-                                        <td><a href="{{ route('lineasBases.editarLineaBase', $item) }}" class="btn btn-warning btn-sm">Editar</a>
+                                        <td style="text-align: center"><a href="{{ route('lineasBases.editarLineaBase', $item) }}" class="btn btn-warning btn-sm">Editar</a>
                                             <form action="{{ route('lineasBases.eliminarLineaBase', $item) }}" method="POST" class="d-inline"> 
                                                 @method('DELETE')
                                                 @csrf

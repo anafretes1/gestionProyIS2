@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-16">
             <div class="card">
-                <div class="card-header" ><h1>ASIGNAR A LA LINEA BASE</h1></div>
+                <div class="card-header" ><h1 style="text-align: center"><b>ASIGNAR A LA LINEA BASE</b></h1></div>
                     <div class="card-body">
                         @if ( session('mensaje') )
                             <div class="alert alert-success">
@@ -48,7 +48,7 @@
                             @endforeach
                             </div>
                                 </table>
-                                    <a href="{{ url('configuracion') }}" class="btn btn-primary">ATRAS</a>
+                                    <a href="{{ url('configuracion') }}" class="btn btn-dark">ATRAS</a>
                                 </div>
                             </div>
                     </div>
