@@ -132,18 +132,46 @@
                                 <td>{{$item->fecha_inicio }}</td>
                                 <td>{{$item->fecha_fin }}</td>
 
-                                <td><a href="{{ route('tareas.editarTarea', $item) }}" class="btn btn-warning btn-sm">Editar</a>
-                                    <form action="{{ route('tareas.eliminarTarea', $item) }}" method="POST" class="d-inline"> 
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
-                                    </form>
-                                </td>
+                                
+
+                                @if($item->base_id == NULL)                 
+                                    <td><a href="{{ route('tareas.editarTarea', $item) }}" class="btn btn-warning btn-sm">Editar</a>
+                                        <form action="{{ route('tareas.eliminarTarea', $item) }}" method="POST" class="d-inline"> 
+                                            @method('DELETE')
+                                            @csrf
+                                            <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                                        </form>
+                                    </td>
+                                @else   
+                               
+                                    <td>
+                                        <a href="{{ route('tareas.editarTarea', $item) }}" 
+                                        class="btn btn-warning btn-sm pull-right" data-toggle="modal" data-target="#errorEditar">Editar</a>
+                                        <a href="{{ route('tareas.eliminarTarea', $item) }}" 
+                                        class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#errorEditar">Eliminar</a>
+                                        
+                                    </td>
+
+                                    <!--<div class="alert alert-danger alert-dismissible fade show" >
+                                    La tarea pertenece a una Linea base
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>-->
+                                @endif
+
+                                
                             </tr>
                             @endforeach
+
                             </div>
                                 </table>
-                                    <a href="{{ url('desarrollo') }}" class="btn btn-primary">ATRAS</a>
+
+                                @include('errorEditar')
+
+
+
+                                    <a href="{{ url('desarrollo') }}" class="btn btn-dark">ATRAS</a>
                                 </div>
                             </div>
                     </div>

@@ -90,7 +90,7 @@
                         </form>
                     </div>
                 </div>
-                <a href="{{ url('desarrollo/tareas') }}" class="btn btn-primary">ATRAS</a>
+                <a href="{{ url('desarrollo/tareas') }}" class="btn btn-dark">ATRAS</a>
             </div>
         </div>
     </div>

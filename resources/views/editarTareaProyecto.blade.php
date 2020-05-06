@@ -91,7 +91,7 @@
                         </form>
                     </div>
                 </div>
-                <a href="{{ url('desarrollo/asignarTareaProyecto') }}" class="btn btn-primary">ATRAS</a>
+                <a href="{{ url('desarrollo/asignarTareaProyecto') }}" class="btn btn-dark">ATRAS</a>
             </div>
         </div>
     </div>

@@ -32,7 +32,7 @@
                         </form>
                     </div>
                 </div>
-                    <a href="{{ url('administracion/permisos') }}" class="btn btn-primary">ATRAS</a>
+                    <a href="{{ url('administracion/permisos') }}" class="btn btn-dark">ATRAS</a>
                 </div>
             </div>
         </div>

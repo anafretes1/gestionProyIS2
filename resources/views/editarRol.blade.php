@@ -36,7 +36,7 @@
                         </form>
                     </div>
                     </div>
-                    <a href="{{ url('administracion/roles') }}" class="btn btn-primary">ATRAS</a>
+                    <a href="{{ url('administracion/roles') }}" class="btn btn-dark">ATRAS</a>
                 </div>
             </div>
         </div>

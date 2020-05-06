@@ -30,7 +30,7 @@
                     </form>
                 </div>
             </div>
-            <a href="{{ url('desarrollo/estados') }}" class="btn btn-primary">ATRAS</a>
+            <a href="{{ url('desarrollo/estados') }}" class="btn btn-dark">ATRAS</a>
         </div>
     </div>
 @endsection

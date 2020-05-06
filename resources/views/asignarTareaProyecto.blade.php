@@ -47,7 +47,7 @@
                             @endforeach
                             </div>
                                 </table>
-                                    <a href="{{ url('desarrollo') }}" class="btn btn-primary">ATRAS</a>
+                                    <a href="{{ url('desarrollo') }}" class="btn btn-dark">ATRAS</a>
                                 </div>
                             </div>
                     </div>
