@@ -6,11 +6,11 @@
                 <h4 style="font-size: 4rem;">ERROR !!!</h4>
 
             </div>
-            <div class="modal-body">
+            <div class="alert alert-danger" role= 'alert'>
                 No es posible editar o eliminar la tarea por que pertenece a una linea base.
             </div>
             <div class="modal-footer"  style="justify-content: center">
-                <input type="submit" class="btn btn-primary" value="OK" data-dismiss="modal">
+                <input type="submit" class="btn btn-danger" value="OK" data-dismiss="modal">
             </div>
         </div>
     </div>

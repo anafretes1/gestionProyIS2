@@ -212,6 +212,7 @@ class PagesController extends Controller
     }  
     public function updateTarea(Request $request, $id)
     {
+        //$existe_lineabase = App\Tarea::find($request->$id);
         $tareaUpdate = App\Tarea::findOrFail($id);
         $tareaUpdate->proyecto_id = $request->proyecto_id;
         $tareaUpdate->version_tarea = $request->version_tarea;
