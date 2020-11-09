@@ -134,8 +134,14 @@ Route::delete('/eliminarLineaBase/{id}', 'PagesController@eliminarLineaBase')->n
 Route::get('/verLineaBase/{id}', 'PagesController@verLineaBase' )->name('lineasBases.verLineaBase');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::post('/permisos/crear','PagesController@crear')->name('permisos.crear');
+
+//Route::get('/editarPermiso/{id}', 'PagesController@editar' )->name('permisos.editarPermiso');
+//Route::put('editarPermiso/{id}', 'PagesController@update' )->name('permisos.editarPermiso');
+
 Route::get('/editar/{id}', 'PagesController@editar' )->name('permisos.editar');
 Route::put('editar/{id}', 'PagesController@update' )->name('permisos.update');
+Route::delete('/eliminar/{id}', 'PagesController@eliminar')->name('permisos.eliminar');
 
 Route::get('/editarRol/{id}', 'PagesController@editarRol' )->name('roles.editarRol');
 Route::put('editarRol/{id}', 'PagesController@updateRol' )->name('roles.updateRol');

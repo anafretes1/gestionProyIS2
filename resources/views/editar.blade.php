@@ -23,7 +23,7 @@
                             @enderror
                             <div class="form-group">
                                 <input type="text" name="name" placeholder="Nombre" class="form-control mb-2" value="{{ $permisos->name }}">
-                                value="{{ $permisos->descripcion_permiso }}">
+                                {{ $permisos->descripcion_permiso }}
                                 <div class="justify-content-end">
 
                                     <button class="btn btn-success btn-block" type="submit">Editar</button>

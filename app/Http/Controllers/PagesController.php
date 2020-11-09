@@ -70,8 +70,10 @@ class PagesController extends Controller
         $request->validate([
             'name' => 'required'
         ]);
-        $permisoNuevo = new App\Permiso;
+        //$permisoNuevo = new App\Permiso;
+        $permisoNuevo = new App\Permission;
         $permisoNuevo->name = $request->name;
+        $permisoNuevo->guard_name = 'web';
         //$permisoNuevo->guard_name = 'web'; //$request->descripcion_permiso;
         $permisoNuevo->save();
         return back()->with('mensaje', 'Permiso agregado!!!');
@@ -152,12 +154,12 @@ class PagesController extends Controller
 
     public function editar($id)
     {
-        $permisos = App\Permiso::findOrFail($id);
+        $permisos = App\Permission::findOrFail($id);
             return view('editar', compact('permisos'));
     }                         
     public function update(Request $request, $id)
     {
-        $permisoUpdate = App\Permiso::findOrFail($id);
+        $permisoUpdate = App\Permission::findOrFail($id);
         //$permisoUpdate->nombre_permiso = $request->nombre_permiso;
         //$permisoUpdate->descripcion_permiso = $request->descripcion_permiso;
         $permisoUpdate->name = $request->name;
@@ -391,7 +393,7 @@ public function statusLineaBase()
                         //SECCION ELIMINAR
     public function eliminar($id)
     {
-        $permisoEliminar = App\Permiso::findOrFail($id);
+        $permisoEliminar = App\Permission::findOrFail($id);
         $permisoEliminar->delete();
         return back()->with('mensaje', 'Permiso Eliminado!!!');
     }

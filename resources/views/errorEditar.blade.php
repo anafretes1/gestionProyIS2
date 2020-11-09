@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content ">
             <div class="modal-header">
-            <img src="{{asset('../imagenes/error.png')}}" class="card-img-top" alt="desarrollo" style="width: 100px">
+            <img src="{{asset('imagenes/error.png')}}" class="card-img-top" alt="desarrollo" style="width: 100px">
                 <h4 style="font-size: 4rem;">ERROR !!!</h4>
 
             </div>
